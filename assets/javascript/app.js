@@ -1,5 +1,5 @@
 $(function () {
-
+    //object to hold questions
     function gameTrivia(question, op1, op2, op3, op4, answer, point, user_answer, inlineRadio) {
         this.question = question;
         this.op1 = op1;
@@ -12,7 +12,7 @@ $(function () {
         this.radio = inlineRadio;
 
     }
-
+    //questions and answers
     var trivia1 = new gameTrivia("Question 1", "op1", "op2", "op3", "op4", "op1", 5, "", "inlineRadio1");
     createTriviaDom(trivia1);
     var trivia2 = new gameTrivia("Question 2", "op1", "op2", "op3", "op4", "op1", 5, "", "inlineRadio2");
@@ -21,15 +21,16 @@ $(function () {
     createTriviaDom(trivia3);
 
     var gamePoints =0;
+    // create Dom for questions
     function createTriviaDom(trivia) {
-
+        //Form 
         var formQuestions = $("<form>");
         formQuestions.attr("id","triviaHead" + trivia.radio);
-        $(".formContainer" ).append(formQuestions);
+        $(".formContainer" ).prepend(formQuestions);
 
         var br = $("<br>");
         $("#triviaHead"+ trivia.radio).append(br);
-
+        //Question
         var labelQuestion = $("<label>");
         labelQuestion.attr("answer", trivia.answer);
         labelQuestion.attr("for", trivia.radio);
@@ -39,6 +40,7 @@ $(function () {
         var br = $("<br>");
         $("#triviaHead"+ trivia.radio).append(br);
 
+        //Div to hold options
         var divContainer = $("<div>");
         divContainer.addClass("form-check form-check-inline");
         divContainer.attr("id", "answersOp" + trivia.radio);
@@ -54,7 +56,7 @@ $(function () {
             var answerVarName = "trivia." + option;
 
 
-
+            //Create options
             var liAnswer = $("<input>");
             liAnswer.addClass("form-check-input");
             liAnswer.attr("id", "inlineRadio" + i);
@@ -67,11 +69,14 @@ $(function () {
             // liAnswer.text(eval(answerVarName));
             $("#answersOp" + trivia.radio).append(liAnswer);
 
+            //create labels for options
             var label = $("<label>");
             label.addClass("form-check-label");
             label.attr("for", "inlineRadio" + i);
             label.text(eval(answerVarName));
             $("#answersOp" + trivia.radio).append(label);
+
+
 
 
         }
@@ -84,8 +89,8 @@ $(function () {
 })
 
 //Get the radio button clicked with the data attributes
-var correctAnswer=0;
-var incorrectAnswer=0;
+var correctAnswerCount=0;
+var incorrectAnswerCount=0;
 var notanswered=0;
 jQuery(document).delegate( "input[type='radio']", "click",
     function(e){
@@ -96,13 +101,34 @@ jQuery(document).delegate( "input[type='radio']", "click",
 
    // console.log("entra" + test);
     if (answerClicked === correctAnswer) {
-        correctAnswer++
+       
+        correctAnswerCount++
+        console.log("correct: " + correctAnswerCount);
     } else {
-        incorrectAnswer++
+        incorrectAnswerCount++
+        console.log("incorrect" + incorrectAnswerCount);
     }
     
     
+    
 });
+
+//On click done delete trivia and show score
+$("#buttonDone").on("click",function(){
+clearTrivia();
+$("#show-number").html("<h3>Correct Answers: " + correctAnswerCount + "</h3>"
+                        + "<h3>Incorrect Answers: " + incorrectAnswerCount + "</h3>");
+
+                      
+
+});
+
+//clear trivia questions
+function clearTrivia() {
+    $(".formContainer").remove();
+    
+    console.log("remove");
+}
 
 //$("input[type=radio]").click(function(event) {
   //  var text = event.target.id;

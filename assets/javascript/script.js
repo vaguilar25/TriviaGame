@@ -76,13 +76,17 @@ $(function () {
 
         }
 
+        
+
     }
 
 
 })
 
 //Get the radio button clicked with the data attributes
-var gamePoints=0
+var correctAnswer=0;
+var incorrectAnswer=0;
+var notanswered=0;
 jQuery(document).delegate( "input[type='radio']", "click",
     function(e){
     var questionClicked = $(this).attr("question");
@@ -92,10 +96,12 @@ jQuery(document).delegate( "input[type='radio']", "click",
 
    // console.log("entra" + test);
     if (answerClicked === correctAnswer) {
-        gamePoints=gamePoints+$(this).attr("points");
+        correctAnswer++
+    } else {
+        incorrectAnswer++
     }
     
-    console.log("Points" + gamePoints);
+    
 });
 
 //$("input[type=radio]").click(function(event) {
