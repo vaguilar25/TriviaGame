@@ -1,4 +1,4 @@
-# TriviaGame
+# Trivia Game
 Create trivia form with multiple choices .
 
 The player will have a limited amount of time to finish the quiz. 
