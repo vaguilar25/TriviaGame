@@ -60,7 +60,7 @@ I also show a countdown timer.
 
 ## Versioning
 
-I use [GitHub](https://github.com/) for versioning. For the versions available, see the [tags on this repository](https://github.com/vaguilar25/unit-4-game). 
+I use [GitHub](https://github.com/) for versioning. For the versions available, see the [tags on this repository](https://github.com/vaguilar25/TriviaGame/). 
 
 ## Authors
 
